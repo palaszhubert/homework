@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  app:
+    build: .
+    ports:
+      - "${APP_PORT}:5000"
+
+  db:
+    image: mysql:5.7.29
+    ports:
+      - "3606:3606"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./bin/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: main
